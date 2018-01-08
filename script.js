@@ -9,14 +9,16 @@ $(document).ready(function() {
 			let a = $("<button>");
 			a.addClass("movie");
 			a.attr("data-name", topics[i]);
+			a.attr("src", "images.fixed_width_still.url");
+			a.attr("data-still", "images.fixed_width_still.url");
+			a.attr("data-animate", "images.fixed_width.url");
+			a.attr("data-state", "still");
 			a.text(topics[i]);
 			$('#movieButtons').append(a);
 		};
 	};
 
 	createButtons();
-
-	console.log(topics);
 
 	$('#additional').on("click", function(event) {
 		event.preventDefault();
@@ -26,6 +28,7 @@ $(document).ready(function() {
 	})
 
 	$('.movie').on("click", function() {
+		console.log(this);
 
 		const movie = $(this).attr('data-name');
 
@@ -54,6 +57,18 @@ $(document).ready(function() {
 					$('#movieGifs').prepend(gifDiv);
 				};
 			};
+
+			$('#movieButtons').on("click", function() {
+				const state = $(this).attr("data-state")
+
+				if (state === "still") {
+					$(this).attr("src", $(this).attr("data-still"));
+					$(this).attr("data-state", "animate");
+				} else {
+					$(this).attr("src", $(this).attr("data-still"));
+					$(this).attr("data-state", "still");
+				}
+			})
 		});
 	});	
 });
