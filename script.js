@@ -8,27 +8,27 @@ $(document).ready(function() {
 		for (let i = 0; i < topics.length; i++) {
 			let a = $("<button>");
 			a.addClass("movie");
+			a.addClass("btn btn-info");
 			a.attr("data-name", topics[i]);
 			a.attr("src", "images.fixed_width_still.url");
 			a.attr("data-still", "images.fixed_width_still.url");
 			a.attr("data-animate", "images.fixed_width.url");
 			a.attr("data-state", "still");
 			a.text(topics[i]);
+			a.css({"margin": "10px"});
 			$('#movieButtons').append(a);
 		};
 	};
 
 	createButtons();
 
-	$('#additional').on("click", function(event) {
-		event.preventDefault();
-		let newMovie = $('#movie-input').val().trim();
-		topics.push(newMovie);
-		createButtons();
-	})
-
 	$('.movie').on("click", function() {
-		console.log(this);
+		$('#additional').on("click", function(event) {
+			event.preventDefault();
+			let newMovie = $('#movie-input').val().trim();
+			topics.push(newMovie);
+			createButtons();
+		})
 
 		const movie = $(this).attr('data-name');
 

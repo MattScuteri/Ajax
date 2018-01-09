@@ -2,25 +2,35 @@
 
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="script.js"></script>
 	<title>GIPHY API</title>
 </head>
 
 <body>
-	<div id="movieButtons">
+	
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div id="movieButtons" style="margin: 30px;">
+				</div>
+			</div>
+			<div class="col">
+				<form id="movie-form">
+					<label for="movie-input">Add a movie</label>
+					<input type="text" id="movie-input"><br>
 
-	</div>
-
-	<form id="movie-form">
-		<label for="movie-input">Add a movie</label>
-		<input type="text" id="movie-input"><br>
-
-		<input id="additional" type="submit" value="Submit">
-	</form>
-
-	<div id="movieGifs">
-	</div>
+					<input id="additional" type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		
+		<div class="row">	
+			<div id="movieGifs">
+			</div>
+		</div>	
+	</div>	
 
 </body>
 
