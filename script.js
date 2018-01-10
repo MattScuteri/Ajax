@@ -11,9 +11,7 @@ $(document).ready(function() {
 			a.addClass("btn btn-info");
 			a.attr("data-name", topics[i]);
 			a.attr("src", "images.fixed_width_still.url");
-			a.attr("data-still", "images.fixed_width_still.url");
-			a.attr("data-animate", "images.fixed_width.url");
-			a.attr("data-state", "still");
+
 			a.text(topics[i]);
 			a.css({"margin": "10px"});
 			$('#movieButtons').append(a);
@@ -22,13 +20,27 @@ $(document).ready(function() {
 
 	createButtons();
 
-	$('.movie').on("click", function() {
-		$('#additional').on("click", function(event) {
-			event.preventDefault();
-			let newMovie = $('#movie-input').val().trim();
-			topics.push(newMovie);
-			createButtons();
-		})
+	$(document.body).on('click', '.movie-image', function() {
+
+		const state = $(this).attr("data-state")
+		console.log(state);
+		if (state === "still") {
+			$(this).attr("src", $(this).attr("data-animate"));
+			$(this).attr("data-state", "animate");
+		} else {
+			$(this).attr("src", $(this).attr("data-still"));
+			$(this).attr("data-state", "still");
+		}
+	})
+
+	$('#additional').on("click", function(event) {
+		event.preventDefault();
+		let newMovie = $('#movie-input').val().trim();
+		topics.push(newMovie);
+		createButtons();
+	})
+	
+	$(document.body).on('click', '.movie', function() {
 
 		const movie = $(this).attr('data-name');
 
@@ -50,7 +62,12 @@ $(document).ready(function() {
 					const rating = results[i].rating;
 					const p = $('<p>').text("Rating: " + rating);
 					const movieImage = $('<img>');
-					movieImage.attr("src", results[i].images.fixed_height.url);
+					movieImage.addClass('movie-image');
+					movieImage.attr('id', 'movie-image-'+i);
+					movieImage.attr("src", results[i].images.fixed_height_still.url);
+					movieImage.attr("data-still", results[i].images.fixed_height_still.url);
+					movieImage.attr("data-animate", results[i].images.fixed_height.url);
+					movieImage.attr("data-state", "still");
 					gifDiv.append(p);
 					gifDiv.append(movieImage);
 
@@ -58,17 +75,7 @@ $(document).ready(function() {
 				};
 			};
 
-			$('#movieButtons').on("click", function() {
-				const state = $(this).attr("data-state")
 
-				if (state === "still") {
-					$(this).attr("src", $(this).attr("data-still"));
-					$(this).attr("data-state", "animate");
-				} else {
-					$(this).attr("src", $(this).attr("data-still"));
-					$(this).attr("data-state", "still");
-				}
-			})
 		});
 	});	
 });
